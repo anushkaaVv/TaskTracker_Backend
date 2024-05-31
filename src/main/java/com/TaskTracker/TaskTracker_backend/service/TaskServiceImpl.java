@@ -33,7 +33,7 @@ public class TaskServiceImpl implements TaskService {
 
        Task task =  taskRepository.findById(taskId)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("Task with this Id not there"  +taskId));
+                        new ResourceNotFoundException("Task with this Id is not there"  +taskId));
         return TaskMapper.mapToTaskDto(task);
     }
 

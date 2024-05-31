@@ -10,6 +10,7 @@ public class TaskMapper {
             task.getId(),
             task.getTaskName(),
             task.getStatus()
+
         );
     }
 
@@ -19,6 +20,7 @@ public class TaskMapper {
                taskDto.getId(),
                taskDto.getTaskName(),
                taskDto.getStatus()
+
         );
     }
 }
