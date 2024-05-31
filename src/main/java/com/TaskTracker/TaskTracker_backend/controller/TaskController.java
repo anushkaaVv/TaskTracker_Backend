@@ -3,7 +3,7 @@ package com.TaskTracker.TaskTracker_backend.controller;
 
 import com.TaskTracker.TaskTracker_backend.dto.TaskDto;
 import com.TaskTracker.TaskTracker_backend.service.TaskService;
-import lombok.AllArgsConstructor;
+//import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,16 +13,11 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-//@AllArgsConstructor
+
 public class TaskController {
     @Autowired
     private TaskService taskService;
 
-    @PostMapping("/task")
-    public ResponseEntity<TaskDto> createTask(@RequestBody TaskDto taskDto){
-        TaskDto savedTask = taskService.createTask(taskDto);
-        return new ResponseEntity<>(savedTask, HttpStatus.CREATED);
-    }
 
     @GetMapping("/tasks/{taskId}")
     public ResponseEntity<TaskDto> getTaskById(@PathVariable("taskId") Long taskId){
@@ -36,6 +31,12 @@ public class TaskController {
         List<TaskDto> list = taskService.getAllTasks();
         return ResponseEntity.ok(list);
 
+    }
+
+    @PostMapping("/task")
+    public ResponseEntity<TaskDto> createTask(@RequestBody TaskDto taskDto){
+        TaskDto savedTask = taskService.createTask(taskDto);
+        return new ResponseEntity<>(savedTask, HttpStatus.CREATED);
     }
 
 

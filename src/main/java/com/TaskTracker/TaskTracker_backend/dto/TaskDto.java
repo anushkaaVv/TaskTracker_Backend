@@ -17,5 +17,5 @@ public class TaskDto {
     private  Long id;
     private  String taskName;
     private  String status;
-
+    private LocalDate date;
 }

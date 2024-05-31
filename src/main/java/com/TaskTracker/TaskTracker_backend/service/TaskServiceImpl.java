@@ -6,6 +6,7 @@ import com.TaskTracker.TaskTracker_backend.exception.ResourceNotFoundException;
 import com.TaskTracker.TaskTracker_backend.mapper.TaskMapper;
 import com.TaskTracker.TaskTracker_backend.repository.TaskRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -13,10 +14,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-@AllArgsConstructor
+//@AllArgsConstructor
 @Service
 public class TaskServiceImpl implements TaskService {
-
+    @Autowired
     private TaskRepository taskRepository;
     @Override
     public TaskDto createTask(TaskDto taskDto) {
@@ -68,7 +69,7 @@ public class TaskServiceImpl implements TaskService {
     public void deleteTask(Long taskId) {
         Task task =  taskRepository.findById(taskId)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException(" this Id is not there"  +taskId));
+                        new ResourceNotFoundException(" This Id is not there"  +taskId));
 
        taskRepository.deleteById((taskId));
     }

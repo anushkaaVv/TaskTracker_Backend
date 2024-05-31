@@ -9,7 +9,8 @@ public class TaskMapper {
         return new TaskDto(
             task.getId(),
             task.getTaskName(),
-            task.getStatus()
+            task.getStatus(),
+                task.getDate()
 
         );
     }
@@ -19,8 +20,8 @@ public class TaskMapper {
         return new Task(
                taskDto.getId(),
                taskDto.getTaskName(),
-               taskDto.getStatus()
-
+                taskDto.getStatus(),
+                taskDto.getDate()
         );
     }
 }

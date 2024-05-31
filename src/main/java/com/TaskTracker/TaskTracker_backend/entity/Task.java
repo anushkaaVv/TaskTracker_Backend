@@ -31,5 +31,6 @@ public class Task {
     @Column(name  = "status")
     private String status;
 
-
+    @Column(name="end_date")
+    private LocalDate date;
 }
