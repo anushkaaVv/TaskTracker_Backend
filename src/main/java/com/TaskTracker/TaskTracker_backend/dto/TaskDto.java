@@ -1,9 +1,5 @@
 package com.TaskTracker.TaskTracker_backend.dto;
-
-
-//import com.TaskTracker.TaskTracker_backend.entity.Task;
 import lombok.*;
-
 import java.time.LocalDate;
 
 @Getter

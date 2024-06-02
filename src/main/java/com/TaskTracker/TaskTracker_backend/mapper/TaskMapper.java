@@ -2,26 +2,25 @@ package com.TaskTracker.TaskTracker_backend.mapper;
 
 import com.TaskTracker.TaskTracker_backend.dto.TaskDto;
 import com.TaskTracker.TaskTracker_backend.entity.Task;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+
+@Component
 public class TaskMapper {
 
-    public static TaskDto mapToTaskDto(Task task){
-        return new TaskDto(
-            task.getId(),
-            task.getTaskName(),
-            task.getStatus(),
-                task.getDate()
+    @Autowired
+    private  ModelMapper modelMapper;
 
-        );
+
+    public  TaskDto taskToTaskDto(Task task) {
+        return modelMapper.map(task, TaskDto.class);
     }
 
 
-    public static Task mapToTask(TaskDto taskDto){
-        return new Task(
-               taskDto.getId(),
-               taskDto.getTaskName(),
-                taskDto.getStatus(),
-                taskDto.getDate()
-        );
+    public Task taskDtoToTask(TaskDto taskDto) {
+        return modelMapper.map(taskDto, Task.class);
     }
+
 }

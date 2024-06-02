@@ -1,14 +1,10 @@
 package com.TaskTracker.TaskTracker_backend.controller;
-
-
 import com.TaskTracker.TaskTracker_backend.dto.TaskDto;
 import com.TaskTracker.TaskTracker_backend.service.TaskService;
-//import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @CrossOrigin("*")
