@@ -12,7 +12,6 @@ public class TaskTrackerBackendApplication {
 		SpringApplication.run(TaskTrackerBackendApplication.class, args);
 	}
 
-
 	@Bean
 	public ModelMapper modelMapper(){
 		return new ModelMapper();
