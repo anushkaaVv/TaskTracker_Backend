@@ -22,17 +22,20 @@ public class TaskDto {
 
     private  Long id;
 
-    @NotBlank(message = "Task name cannot be blank")
+
     @Length(min = 3, max = 30, message = "Task name must be between 3-15 characters")
     private  String taskName;
 
 
-    @NotBlank(message = "Status cannot be blank")
+    @NotBlank()
     private String status;
 
     @NotNull
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate date;
+
+
+
 
 
 }
