@@ -6,6 +6,7 @@ import com.TaskTracker.TaskTracker_backend.exception.ResourceNotFoundException;
 import com.TaskTracker.TaskTracker_backend.mapper.TaskMapper;
 import com.TaskTracker.TaskTracker_backend.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
@@ -21,6 +22,15 @@ public class TaskServiceImpl implements TaskService {
 
     @Autowired
     private TaskMapper taskMapper;
+
+
+    public Task findThisId(Long taskId){
+
+        Task task =  taskRepository.findById(taskId)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Task with "+ taskId + " "  + "Id is not there"  ));
+        return task;
+    }
     @Override
     public TaskDto createTask(TaskDto taskDto) {
         Task task = taskMapper.taskDtoToTask(taskDto);
@@ -30,9 +40,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public TaskDto getTaskById(Long taskId) {
-       Task task =  taskRepository.findById(taskId)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException("Task with "+ taskId + " "  + "Id is not there"  ));
+            Task task = findThisId(taskId);
         return taskMapper.taskToTaskDto(task);
     }
 
@@ -40,7 +48,7 @@ public class TaskServiceImpl implements TaskService {
     @GetMapping("tasks")
     @Override
     public List<TaskDto> getAllTasks() {
-        List<Task> list = taskRepository.findAll();
+        List<Task> list = taskRepository.findAll(Sort.by("date").ascending());
 
         return list.stream().map((task) -> taskMapper.taskToTaskDto(task))
                 .collect(Collectors.toList());
@@ -50,8 +58,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public TaskDto updateTask(Long taskId, TaskDto updatedTask) {
-       Task task = taskRepository.findById(taskId).orElseThrow(() ->
-                new ResourceNotFoundException("No matching taskId" + taskId));
+        Task task = findThisId(taskId);
 
        task.setTaskName(updatedTask.getTaskName());
        task.setStatus(updatedTask.getStatus());
@@ -63,9 +70,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public void deleteTask(Long taskId) {
-        Task task =  taskRepository.findById(taskId)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException(" This Id is not there"  +taskId));
+        Task task = findThisId(taskId);
 
        taskRepository.deleteById((taskId));
     }

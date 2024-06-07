@@ -1,16 +1,14 @@
 package com.TaskTracker.TaskTracker_backend.dto;
 
+import com.TaskTracker.TaskTracker_backend.entity.StatusEnum;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Getter
 @Setter
@@ -21,17 +19,16 @@ public class TaskDto {
 
 
     private  Long id;
-
-
     @Length(min = 3, max = 30, message = "Task name must be between 3-15 characters")
     private  String taskName;
 
 
-    @NotBlank()
-    private String status;
+    @NotNull(message = "Status cannot be null")
+    @Enumerated(EnumType.STRING)
+    private StatusEnum status;
 
-    @NotNull
-    @JsonFormat(pattern = "dd/MM/yyyy")
+
+    @NotNull(message = "Date cannot be null")
     private LocalDate date;
 
 

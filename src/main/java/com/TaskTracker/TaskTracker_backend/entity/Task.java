@@ -1,5 +1,6 @@
 package com.TaskTracker.TaskTracker_backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 
@@ -32,9 +33,12 @@ public class Task {
     @Column(name = "task_name")
     private String taskName;
 
-//    @Enumerated(EnumType.STRING)
+
     @Column(name  = "status")
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private StatusEnum status;
+
+
 
     @Column(name="end_date")
     private LocalDate date;

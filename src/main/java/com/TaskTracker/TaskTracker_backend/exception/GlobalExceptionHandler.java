@@ -1,6 +1,8 @@
 package com.TaskTracker.TaskTracker_backend.exception;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -26,6 +28,13 @@ public class GlobalExceptionHandler {
             Map<String,String> err=new HashMap<>();
             ex.getBindingResult().getFieldErrors().forEach(error->{err.put(error.getField(),error.getDefaultMessage());});
             return err;
+        }
+
+
+        @ResponseStatus(HttpStatus.BAD_REQUEST)
+        @ExceptionHandler(HttpMessageNotReadableException.class)
+        public ResponseEntity<String> handleInvalidInput(HttpMessageNotReadableException e) {
+            return ResponseEntity.badRequest().body("Status should be either Done or Pending");
         }
 
 }
