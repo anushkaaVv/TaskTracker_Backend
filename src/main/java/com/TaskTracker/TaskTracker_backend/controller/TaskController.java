@@ -1,5 +1,6 @@
 package com.TaskTracker.TaskTracker_backend.controller;
 import com.TaskTracker.TaskTracker_backend.dto.TaskDto;
+import com.TaskTracker.TaskTracker_backend.requestObject.TaskRequestObject;
 import com.TaskTracker.TaskTracker_backend.service.TaskService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +33,9 @@ public class TaskController {
     }
 
     @PostMapping("/task")
-    public ResponseEntity<TaskDto> createTask( @Valid @RequestBody TaskDto taskDto){
-        TaskDto savedTask = taskService.createTask(taskDto);
+    public ResponseEntity<?> createTask( @Valid @RequestBody TaskRequestObject request){
+
+        TaskRequestObject savedTask = taskService.createTask(request);
         return new ResponseEntity<>(savedTask, HttpStatus.CREATED);
     }
 

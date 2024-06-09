@@ -5,8 +5,11 @@ import com.TaskTracker.TaskTracker_backend.entity.Task;
 import com.TaskTracker.TaskTracker_backend.exception.ResourceNotFoundException;
 import com.TaskTracker.TaskTracker_backend.mapper.TaskMapper;
 import com.TaskTracker.TaskTracker_backend.repository.TaskRepository;
+import com.TaskTracker.TaskTracker_backend.requestObject.TaskRequestObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
@@ -32,10 +35,12 @@ public class TaskServiceImpl implements TaskService {
         return task;
     }
     @Override
-    public TaskDto createTask(TaskDto taskDto) {
+    public TaskRequestObject createTask(TaskRequestObject request) {
+        TaskDto taskDto = taskMapper.requestToTaskDto(request);
         Task task = taskMapper.taskDtoToTask(taskDto);
         Task savedTask = taskRepository.save(task);
-        return taskMapper.taskToTaskDto(savedTask);
+        TaskDto t =  taskMapper.taskToTaskDto(savedTask);
+        return  taskMapper.taskDtoToRequest(t);
     }
 
     @Override
@@ -59,7 +64,6 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public TaskDto updateTask(Long taskId, TaskDto updatedTask) {
         Task task = findThisId(taskId);
-
        task.setTaskName(updatedTask.getTaskName());
        task.setStatus(updatedTask.getStatus());
         task.setDate(updatedTask.getDate());
