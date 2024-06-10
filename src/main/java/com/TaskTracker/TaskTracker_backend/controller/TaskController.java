@@ -1,5 +1,6 @@
 package com.TaskTracker.TaskTracker_backend.controller;
 import com.TaskTracker.TaskTracker_backend.dto.TaskDto;
+import com.TaskTracker.TaskTracker_backend.entity.Task;
 import com.TaskTracker.TaskTracker_backend.requestObject.TaskRequestObject;
 import com.TaskTracker.TaskTracker_backend.service.TaskService;
 import jakarta.validation.Valid;
@@ -26,16 +27,15 @@ public class TaskController {
 
 
     @GetMapping("/tasks")
-    public  ResponseEntity<List<TaskDto>> getAllTasks(){
-        List<TaskDto> list = taskService.getAllTasks();
+    public  ResponseEntity<List<Task>> getAllTasks(){
+        List<Task> list = taskService.getAllTasks();
         return ResponseEntity.ok(list);
 
     }
 
     @PostMapping("/task")
-    public ResponseEntity<?> createTask( @Valid @RequestBody TaskRequestObject request){
-
-        TaskRequestObject savedTask = taskService.createTask(request);
+    public ResponseEntity<?> createTask( @Valid @RequestBody TaskDto request){
+        Task savedTask = taskService.createTask(request);
         return new ResponseEntity<>(savedTask, HttpStatus.CREATED);
     }
 

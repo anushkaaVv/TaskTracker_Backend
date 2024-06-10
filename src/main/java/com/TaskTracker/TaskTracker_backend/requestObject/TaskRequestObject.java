@@ -1,3 +1,7 @@
+
+//For Future REference extra layer added for  abstraction of authencation
+
+
 package com.TaskTracker.TaskTracker_backend.requestObject;
 
 import com.TaskTracker.TaskTracker_backend.entity.StatusEnum;
@@ -25,7 +29,6 @@ public class TaskRequestObject {
 
 
     @Enumerated(EnumType.STRING)
-//    @NotNull(message = "status cannot be null")
     private StatusEnum status;
 
     @NotNull(message = "Date cannot be null")

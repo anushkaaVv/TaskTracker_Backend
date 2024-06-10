@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,12 +36,15 @@ public class TaskServiceImpl implements TaskService {
         return task;
     }
     @Override
-    public TaskRequestObject createTask(TaskRequestObject request) {
-        TaskDto taskDto = taskMapper.requestToTaskDto(request);
+    public Task createTask(TaskDto taskDto) {
+//        TaskDto taskDto = taskMapper.requestToTaskDto(request);
         Task task = taskMapper.taskDtoToTask(taskDto);
         Task savedTask = taskRepository.save(task);
-        TaskDto t =  taskMapper.taskToTaskDto(savedTask);
-        return  taskMapper.taskDtoToRequest(t);
+//        TaskDto t =  taskMapper.taskToTaskDto(savedTask);
+
+//        return  t;
+
+        return savedTask;
     }
 
     @Override
@@ -52,11 +56,13 @@ public class TaskServiceImpl implements TaskService {
 
     @GetMapping("tasks")
     @Override
-    public List<TaskDto> getAllTasks() {
+    public List<Task> getAllTasks() {
         List<Task> list = taskRepository.findAll(Sort.by("date").ascending());
 
-        return list.stream().map((task) -> taskMapper.taskToTaskDto(task))
-                .collect(Collectors.toList());
+//        return list.stream().map((task) -> taskMapper.taskToTaskDto(task))
+//                .collect(Collectors.toList());
+
+        return list;
 
     }
 
@@ -75,7 +81,6 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public void deleteTask(Long taskId) {
         Task task = findThisId(taskId);
-
        taskRepository.deleteById((taskId));
     }
 

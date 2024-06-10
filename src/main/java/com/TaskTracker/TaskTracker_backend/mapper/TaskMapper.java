@@ -19,12 +19,11 @@ public class TaskMapper {
         return modelMapper.map(task, TaskDto.class);
     }
 
-
     public Task taskDtoToTask(TaskDto taskDto) {
         return modelMapper.map(taskDto, Task.class);
     }
 
-    public  TaskDto requestToTaskDto(TaskRequestObject request){return  modelMapper.map(request,TaskDto.class);}
-    public TaskRequestObject taskDtoToRequest(TaskDto taskDto){return  modelMapper.map(taskDto, TaskRequestObject.class);}
+//    public  TaskDto requestToTaskDto(TaskRequestObject request){return  modelMapper.map(request,TaskDto.class);}
+//    public TaskRequestObject taskDtoToRequest(TaskDto taskDto){return  modelMapper.map(taskDto, TaskRequestObject.class);}
 
 }

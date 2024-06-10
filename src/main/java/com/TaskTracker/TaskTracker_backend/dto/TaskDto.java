@@ -16,12 +16,15 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @ToString
 public class TaskDto {
-    private  String id;
+//    private  String id;
+    @Length(min = 3, max = 30, message = "Task name must be between 3-15 characters")
     private  String taskName;
+
 
     @Enumerated(EnumType.STRING)
     private StatusEnum status;
 
+    @NotNull(message = "Date cannot be null")
     private LocalDate date;
 
 
